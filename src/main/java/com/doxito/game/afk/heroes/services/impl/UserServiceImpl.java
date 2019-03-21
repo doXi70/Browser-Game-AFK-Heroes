@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Service("userDetailsService")
+@Service
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
@@ -32,18 +32,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
-        User user = this.userRepository.findByEmail(userEmail);
+        User user = findByEmail(userEmail);
 
-        if (user == null) {
-            throw new UsernameNotFoundException("Invalid User");
-        } else {
-            Set<GrantedAuthority> grantedAuthorities = user.getRoles().stream()
-                    .map(role -> new SimpleGrantedAuthority(role.getName()))
-                    .collect(Collectors.toSet());
+        Set<GrantedAuthority> grantedAuthorities = user.getRoles().stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .collect(Collectors.toSet());
 
-            return new org.springframework.security.core.
-                    userdetails.User(user.getEmail(), user.getPassword(), grantedAuthorities);
-        }
+        return new org.springframework.security.core.
+                userdetails.User(user.getEmail(), user.getPassword(), grantedAuthorities);
     }
 
     @Override
@@ -53,5 +49,21 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         Role userRole = this.roleRepository.findByName("ROLE_USER");
         user.addRole(userRole);
         this.userRepository.saveAndFlush(user);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        User user = this.userRepository.findByEmail(email);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("Invalid User");
+        }
+
+        return user;
+    }
+
+    @Override
+    public void save(User user) {
+        this.userRepository.save(user);
     }
 }

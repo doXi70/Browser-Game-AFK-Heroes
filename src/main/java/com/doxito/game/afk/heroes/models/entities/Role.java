@@ -1,5 +1,6 @@
 package com.doxito.game.afk.heroes.models.entities;
 
+import com.doxito.game.afk.heroes.constants.UserRole;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,5 +25,10 @@ public class Role extends BaseEntity {
 
     public Role() {
         this.users = new HashSet<>();
+    }
+
+    public Role(UserRole role) {
+        this();
+        this.name = role.getName();
     }
 }

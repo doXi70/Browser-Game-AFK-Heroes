@@ -1,0 +1,41 @@
+<form class="form-horizontal" th:action="@{/choose-hero}" method="post">
+    <table>
+        <th>Choose Your First Hero:</th>
+        <tr>
+            <td>
+                <span>Warrior</span>
+                <input type="checkbox" name="hero" value="warrior"></input>
+            </td>
+
+            <td>
+                <span>Rogue</span>
+                <input type="checkbox" name="hero" value="rogue"></input>
+            </td>
+
+            <td>
+                <span>Mage</span>
+                <input type="checkbox" name="hero" value="mage"></input>
+            </td>
+
+            <td>
+                <span>Priest</span>
+                <input type="checkbox" name="hero" value="priest"></input>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="/images/warrior.jpg" width="200px" height="200px"></img>
+            </td>
+            <td>
+                <img src="/images/rogue.jpg" width="200px" height="200px"></img>
+            </td>
+            <td>
+                <img src="/images/mage.jpg" width="200px" height="200px"></img>
+            </td>
+            <td>
+                <img src="/images/priest.jpg" width="200px" height="200px"></img>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="SUBMIT"></input>
+</form>

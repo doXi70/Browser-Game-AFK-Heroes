@@ -4,7 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -32,8 +34,13 @@ public class User extends BaseEntity {
     @JoinTable(name = "users_roles")
     private Set<Role> roles;
 
+    @ManyToMany
+    @JoinTable(name = "users_heroes")
+    private List<Hero> heroes;
+
     public User() {
         this.roles = new HashSet<>();
+        this.heroes = new ArrayList<>();
     }
 
     public User(String email, String username, String password) {

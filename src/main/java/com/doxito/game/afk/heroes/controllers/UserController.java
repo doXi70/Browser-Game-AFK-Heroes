@@ -1,21 +1,17 @@
 package com.doxito.game.afk.heroes.controllers;
 
 import com.doxito.game.afk.heroes.models.dtos.UserRegisterDto;
-import com.doxito.game.afk.heroes.models.entities.User;
 import com.doxito.game.afk.heroes.services.RoleService;
 import com.doxito.game.afk.heroes.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -61,7 +57,6 @@ public class UserController {
         }
 
         userService.createNewUser(userRegisterDto);
-
         return "redirect:/login";
     }
 }
