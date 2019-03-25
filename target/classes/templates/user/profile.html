@@ -1,0 +1,29 @@
+<div>
+    <div th:text="${user.email}"></div>
+    <a th:href="@{/profile/{id}(id=${user.id})}" class="letters-ren a-custom">Edit Profile</a>
+    <br></br>
+    <br></br>
+    <th:block th:each="hero : ${user.heroes}">
+        <div>
+            <span>Name: </span>
+            <span th:text="${hero.name}"></span>
+        </div>
+        <div>
+            <span>Class: </span>
+            <span th:text="${hero.heroClass}"></span>
+        </div>
+        <div>
+            <span>Level: </span>
+            <span th:text="${hero.level}"></span>
+        </div>
+        <div>
+            <span>Experience: </span>
+            <span th:text="${hero.experience}"></span>
+        </div>
+
+        <div>
+            <a th:href="@{/heroes/{id}(id=${hero.id})}" class="letters-ren a-custom">Details</a>
+        </div>
+        <br></br>
+    </th:block>
+</div>

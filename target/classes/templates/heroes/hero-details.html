@@ -1,0 +1,51 @@
+<main>
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <form>
+                <fieldset>
+                    <legend>Hero Details</legend>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="hero_name">Name</label>
+                        <div class="col-sm-4 ">
+                        <input class="form-control" type="text" id="hero_name" th:value="${hero.name}"
+                               placeholder="Hero Name" name="heroName" disabled="disabled"/>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="hero_class">Class</label>
+                        <div class="col-sm-4 ">
+                            <input class="form-control" type="text" id="hero_class" th:value="${hero.heroClass}"
+                                   placeholder="Hero Class" name="heroClass" disabled="disabled"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="hero_level">Hero Level</label>
+                        <div class="col-sm-4 ">
+                            <input class="form-control" type="text" id="hero_level" th:value="${hero.level}"
+                                   placeholder="Hero Level" name="level" disabled="disabled"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="hero_exp">Hero Experience</label>
+                        <div class="col-sm-4 ">
+                            <input class="form-control" type="text" id="hero_exp" th:value="${hero.experience}"
+                                   placeholder="Hero EXP" name="experience" disabled="disabled"/>
+                        </div>
+                    </div>
+                    <br></br>
+                    <div>
+                        <b>Items</b>
+                    </div>
+
+                    <!--TODO: print items -->
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <a class="btn btn-default" th:href="@{/profile}">Back</a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</main>
