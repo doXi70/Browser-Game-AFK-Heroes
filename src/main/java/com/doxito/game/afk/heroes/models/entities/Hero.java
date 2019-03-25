@@ -2,6 +2,7 @@ package com.doxito.game.afk.heroes.models.entities;
 
 
 import com.doxito.game.afk.heroes.constants.HeroClass;
+import com.doxito.game.afk.heroes.constants.HeroesInitialStats;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,17 +35,16 @@ public class Hero extends BaseEntity {
     @Column(name = "health")
     private Long health;
 
-    @ManyToMany(mappedBy = "heroes")
-    private List<User> users;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User user;
 
     @ManyToMany(mappedBy = "heroes")
     private List<Item> items;
 
     public Hero() {
-        this.users = new ArrayList<>();
         this.items = new ArrayList<>();
-        this.experience = 0L;
-        this.level = 1L;
+        this.experience = HeroesInitialStats.EXPERIENCE;
+        this.level = HeroesInitialStats.LEVEL;
     }
 
 }

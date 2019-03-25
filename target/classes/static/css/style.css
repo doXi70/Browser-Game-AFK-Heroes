@@ -7074,15 +7074,28 @@ a.list-group-item-danger.active:focus {
 .popover {
     color: #2c3e50;
 }
-article .author {
-    margin-bottom: 0;
+
+
+table {
+    margin-left: 10%;
+    text-align: center;
 }
-article .author  {
+
+
+th {
+    text-align: center;
+}
+
+td img {
     display: block;
-    font-size: 100%;
-    line-height: 1.42857143;
-    color: #b4bcc2;
+    margin-left: auto;
+    margin-right: auto;
 }
-article .author  {
-    content: '\2014 \00A0';
+
+td {
+    width: 300px;
+}
+
+td:hover {
+    background-color: lightgreen;
 }

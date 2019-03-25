@@ -1,8 +1,11 @@
 package com.doxito.game.afk.heroes.services.impl;
 
+import com.doxito.game.afk.heroes.models.dtos.EditUserProfileDto;
 import com.doxito.game.afk.heroes.models.dtos.UserRegisterDto;
+import com.doxito.game.afk.heroes.models.entities.Hero;
 import com.doxito.game.afk.heroes.models.entities.Role;
 import com.doxito.game.afk.heroes.models.entities.User;
+import com.doxito.game.afk.heroes.repositories.HeroRepository;
 import com.doxito.game.afk.heroes.repositories.RoleRepository;
 import com.doxito.game.afk.heroes.repositories.UserRepository;
 import com.doxito.game.afk.heroes.services.UserService;
@@ -15,6 +18,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,11 +27,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final HeroRepository heroRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository,
+                           HeroRepository heroRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.heroRepository = heroRepository;
     }
 
     @Override
@@ -59,11 +66,30 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             throw new UsernameNotFoundException("Invalid User");
         }
 
+        List<Hero> heroes = this.heroRepository.findAllByUserId(user.getId());
+        user.setHeroes(heroes);
         return user;
     }
 
     @Override
     public void save(User user) {
         this.userRepository.save(user);
+    }
+
+    @Override
+    public void editUser(EditUserProfileDto newUserData, String principalName) {
+        User oldUserData = this.findByEmail(principalName);
+        //TODO: validate
+
+        if (!newUserData.getPassword().equals(newUserData.getConfirmPassword())) {
+            return;
+        }
+
+        oldUserData.setEmail(newUserData.getEmail());
+        oldUserData.setFirstName(newUserData.getFirstName());
+        oldUserData.setLastName(newUserData.getLastName());
+        oldUserData.setUsername(newUserData.getUsername());
+        oldUserData.setPassword(new BCryptPasswordEncoder().encode(newUserData.getPassword()));
+        this.userRepository.save(oldUserData);
     }
 }

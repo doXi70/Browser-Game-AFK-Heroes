@@ -9,9 +9,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Entity
 @Getter
 @Setter
+@Entity
 @Table(name = "users")
 public class User extends BaseEntity {
 
@@ -34,8 +34,7 @@ public class User extends BaseEntity {
     @JoinTable(name = "users_roles")
     private Set<Role> roles;
 
-    @ManyToMany
-    @JoinTable(name = "users_heroes")
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Hero> heroes;
 
     public User() {
