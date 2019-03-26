@@ -7,10 +7,9 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="hero_name">Name</label>
                         <div class="col-sm-4 ">
-                        <input class="form-control" type="text" id="hero_name" th:value="${hero.name}"
-                               placeholder="Hero Name" name="heroName" disabled="disabled"/>
+                            <input class="form-control" type="text" id="hero_name" th:value="${hero.name}"
+                                   placeholder="Hero Name" name="heroName" disabled="disabled"/>
                         </div>
-
                     </div>
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="hero_class">Class</label>
@@ -38,7 +37,16 @@
                         <b>Items</b>
                     </div>
 
-                    <!--TODO: print items -->
+                    <th:block th:each="item : ${hero.items}">
+                        <div class="form-group">
+                            <div class="col-sm-4 ">
+                                <h2 th:text="${item.slot}"></h2>
+                                <h2 th:text="${item.name}"></h2>
+                            </div>
+                        </div>
+                    </th:block>
+
+
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-4">
                             <a class="btn btn-default" th:href="@{/profile}">Back</a>

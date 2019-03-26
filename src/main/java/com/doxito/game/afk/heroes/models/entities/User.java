@@ -34,12 +34,9 @@ public class User extends BaseEntity {
     @JoinTable(name = "users_roles")
     private Set<Role> roles;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Hero> heroes;
 
     public User() {
         this.roles = new HashSet<>();
-        this.heroes = new ArrayList<>();
     }
 
     public User(String email, String username, String password) {

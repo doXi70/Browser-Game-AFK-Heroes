@@ -3,7 +3,7 @@
     <a th:href="@{/profile/{id}(id=${user.id})}" class="letters-ren a-custom">Edit Profile</a>
     <br></br>
     <br></br>
-    <th:block th:each="hero : ${user.heroes}">
+    <th:block th:each="hero : ${heroes}">
         <div>
             <span>Name: </span>
             <span th:text="${hero.name}"></span>

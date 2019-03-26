@@ -38,7 +38,8 @@ public class Hero extends BaseEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
-    @ManyToMany(mappedBy = "heroes")
+    @ManyToMany
+    @JoinTable(name = "heroes_items")
     private List<Item> items;
 
     public Hero() {

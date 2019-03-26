@@ -17,8 +17,8 @@ public class Item extends BaseEntity {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "slot", nullable = false)
     @Enumerated(EnumType.STRING)
-    @Column(name = "slot")
     private ItemSlot slot;
 
     @Column(name = "damage")
@@ -27,8 +27,7 @@ public class Item extends BaseEntity {
     @Column(name = "health")
     private Long health;
 
-    @ManyToMany
-    @JoinTable(name = "items_heroes")
+    @ManyToMany(mappedBy = "items",fetch = FetchType.EAGER)
     private List<Hero> heroes;
 
     public Item() {

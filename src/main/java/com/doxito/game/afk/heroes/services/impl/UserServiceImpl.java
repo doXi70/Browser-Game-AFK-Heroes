@@ -66,8 +66,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             throw new UsernameNotFoundException("Invalid User");
         }
 
-        List<Hero> heroes = this.heroRepository.findAllByUserId(user.getId());
-        user.setHeroes(heroes);
         return user;
     }
 

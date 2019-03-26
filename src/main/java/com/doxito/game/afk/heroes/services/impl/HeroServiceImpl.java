@@ -2,9 +2,10 @@ package com.doxito.game.afk.heroes.services.impl;
 
 import com.doxito.game.afk.heroes.models.dtos.ChooseHeroDto;
 import com.doxito.game.afk.heroes.models.entities.Hero;
-import com.doxito.game.afk.heroes.models.entities.User;
+import com.doxito.game.afk.heroes.models.entities.Item;
 import com.doxito.game.afk.heroes.repositories.HeroRepository;
 import com.doxito.game.afk.heroes.services.HeroService;
+import com.doxito.game.afk.heroes.services.ItemService;
 import com.doxito.game.afk.heroes.services.UserService;
 import com.doxito.game.afk.heroes.utils.HeroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,13 @@ public class HeroServiceImpl implements HeroService {
 
     private HeroRepository heroRepository;
     private UserService userService;
+    private ItemService itemService;
 
     @Autowired
-    public HeroServiceImpl(HeroRepository heroRepository, UserService userService) {
+    public HeroServiceImpl(HeroRepository heroRepository, UserService userService, ItemService itemService) {
         this.heroRepository = heroRepository;
         this.userService = userService;
+        this.itemService = itemService;
     }
 
 
@@ -38,7 +41,7 @@ public class HeroServiceImpl implements HeroService {
 
     @Override
     public Hero findById(Long id) {
-        return this.heroRepository.findOne(id);
+        return  this.heroRepository.findById(id);
     }
 
     @Override

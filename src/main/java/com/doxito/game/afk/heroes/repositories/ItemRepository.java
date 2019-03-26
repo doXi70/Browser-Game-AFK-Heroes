@@ -1,6 +1,7 @@
 package com.doxito.game.afk.heroes.repositories;
 
 import com.doxito.game.afk.heroes.models.entities.Hero;
+import com.doxito.game.afk.heroes.models.entities.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -8,10 +9,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface HeroRepository extends JpaRepository<Hero, Long> {
+public interface ItemRepository extends JpaRepository<Item, Long> {
 
-    @Query(value = "select * from heroes as h where h.user_id =?1", nativeQuery = true)
-    List<Hero> findAllByUserId(Long userId);
+    Item findByName(String name);
 
-    Hero findById(Long id);
+    List<Item> findAllByHeroesIs(Hero hero);
+
 }

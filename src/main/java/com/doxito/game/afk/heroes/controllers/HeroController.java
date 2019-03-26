@@ -1,7 +1,9 @@
 package com.doxito.game.afk.heroes.controllers;
 
+import com.doxito.game.afk.heroes.constants.ItemSlot;
 import com.doxito.game.afk.heroes.models.dtos.ChooseHeroDto;
 import com.doxito.game.afk.heroes.models.entities.Hero;
+import com.doxito.game.afk.heroes.models.entities.Item;
 import com.doxito.game.afk.heroes.services.HeroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class HeroController {
@@ -32,6 +36,7 @@ public class HeroController {
     @GetMapping("/heroes/{heroId}")
     public String getHero(@PathVariable Long heroId, Model model) {
         Hero hero = this.heroService.findById(heroId);
+
         model.addAttribute("hero", hero);
         model.addAttribute("view", "heroes/hero-details");
         return "base-layout";
