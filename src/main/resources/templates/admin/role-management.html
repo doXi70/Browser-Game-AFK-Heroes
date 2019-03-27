@@ -1,0 +1,25 @@
+<table style="border: 3px solid black">
+    <th colspan="5">Roles Management Panel</th>
+    <tr>
+        <td>First Name</td>
+        <td>Last Name</td>
+        <td>Email</td>
+        <td>Username</td>
+        <td>Change Role to</td>
+    </tr>
+    <th:block th:each="user : ${users}">
+        <tr>
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.username}"></td>
+            <td>
+                <a th:href="@{/admin/role-management/{id}(id=${user.id})}" class="letters-ren a-custom">
+                    <!-- TODO: use vo and set boolean -->
+                    <span th:if="!user.isAdmin">Admin</span>
+                    <span th:if="user.isAdmin">User</span>
+                </a>
+            </td>
+        </tr>
+    </th:block>
+</table>

@@ -4,6 +4,8 @@ import com.doxito.game.afk.heroes.models.dtos.EditUserProfileDto;
 import com.doxito.game.afk.heroes.models.dtos.UserRegisterDto;
 import com.doxito.game.afk.heroes.models.entities.User;
 
+import java.util.List;
+
 public interface UserService {
 
     void createNewUser(UserRegisterDto userRegisterDto);
@@ -13,4 +15,6 @@ public interface UserService {
     void save(User user);
 
     void editUser(EditUserProfileDto name, String principalName);
+
+    List<User> findAll();
 }

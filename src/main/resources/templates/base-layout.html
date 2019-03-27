@@ -3,8 +3,14 @@
       xmlns="http://www.w3.org/1999/xhtml">
 <head th:include="fragments/head" th:with="pageTitle='AFK Heroes'"></head>
 <body>
-<header th:include="fragments/header"></header>
+
+<header th:if="${ #authorization.expression('isAuthenticated()')}" th:include="fragments/header-existing"></header>
+<header th:if="${ #authorization.expression('!isAuthenticated()')}" th:include="fragments/header-guest"></header>
+
 <main th:include="${view}"></main>
+
 <footer th:include="fragments/footer"></footer>
-<span th:include="fragments/scripts-bundle"></span></body>
+<span th:include="fragments/scripts-bundle"></span>
+
+</body>
 </html>

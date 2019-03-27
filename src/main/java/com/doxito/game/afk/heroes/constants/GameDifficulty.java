@@ -9,9 +9,9 @@ public enum GameDifficulty {
     HARD(2.0),
     HELL(2.5);
 
-    private Double expMultiplayer;
+    private Double multiplayer;
 
-    GameDifficulty(Double expMultiplayer) {
-        this.expMultiplayer = expMultiplayer;
+    GameDifficulty(Double multiplayer) {
+        this.multiplayer = multiplayer;
     }
 }

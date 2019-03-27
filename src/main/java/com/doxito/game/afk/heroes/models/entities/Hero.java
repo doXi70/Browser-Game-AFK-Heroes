@@ -2,7 +2,7 @@ package com.doxito.game.afk.heroes.models.entities;
 
 
 import com.doxito.game.afk.heroes.constants.HeroClass;
-import com.doxito.game.afk.heroes.constants.HeroesInitialStats;
+import com.doxito.game.afk.heroes.constants.DefaultStatsConstants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -44,8 +44,8 @@ public class Hero extends BaseEntity {
 
     public Hero() {
         this.items = new ArrayList<>();
-        this.experience = HeroesInitialStats.EXPERIENCE;
-        this.level = HeroesInitialStats.LEVEL;
+        this.experience = DefaultStatsConstants.EXPERIENCE;
+        this.level = DefaultStatsConstants.LEVEL;
     }
 
 }

@@ -1,12 +1,13 @@
 package com.doxito.game.afk.heroes.models.entities;
 
+import com.doxito.game.afk.heroes.constants.UserRole;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -48,5 +49,10 @@ public class User extends BaseEntity {
 
     public void addRole(Role role) {
         this.roles.add(role);
+    }
+
+    @Transactional
+    public boolean isAdmin() {
+        return this.roles.stream().anyMatch(r -> r.getName().equals(UserRole.ADMIN.getName()));
     }
 }

@@ -1,5 +1,6 @@
 package com.doxito.game.afk.heroes.services.impl;
 
+import com.doxito.game.afk.heroes.constants.UserRole;
 import com.doxito.game.afk.heroes.models.dtos.EditUserProfileDto;
 import com.doxito.game.afk.heroes.models.dtos.UserRegisterDto;
 import com.doxito.game.afk.heroes.models.entities.Hero;
@@ -18,6 +19,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -53,20 +56,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public void createNewUser(UserRegisterDto userRegisterDto) {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         User user = new User(userRegisterDto.getEmail(), userRegisterDto.getUsername(), bCryptPasswordEncoder.encode(userRegisterDto.getPassword()));
-        Role userRole = this.roleRepository.findByName("ROLE_USER");
+        Role userRole = this.roleRepository.findByName(UserRole.USER.getName());
         user.addRole(userRole);
-        this.userRepository.saveAndFlush(user);
+        LocalDateTime now = LocalDateTime.now(ZoneOffset.UTC);
+//        user.setLastLogin(now);
+        this.userRepository.save(user);
     }
 
     @Override
     public User findByEmail(String email) {
-        User user = this.userRepository.findByEmail(email);
-
-        if (user == null) {
-            throw new UsernameNotFoundException("Invalid User");
-        }
-
-        return user;
+        return this.userRepository.findByEmail(email);
     }
 
     @Override
@@ -89,5 +88,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         oldUserData.setUsername(newUserData.getUsername());
         oldUserData.setPassword(new BCryptPasswordEncoder().encode(newUserData.getPassword()));
         this.userRepository.save(oldUserData);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return this.userRepository.findAll();
     }
 }

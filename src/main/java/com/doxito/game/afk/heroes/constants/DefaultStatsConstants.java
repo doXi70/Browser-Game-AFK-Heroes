@@ -1,6 +1,6 @@
 package com.doxito.game.afk.heroes.constants;
 
-public final class HeroesInitialStats {
+public final class DefaultStatsConstants {
 
     // All Heroes
     public static final Long LEVEL = 1L;
@@ -22,6 +22,11 @@ public final class HeroesInitialStats {
     public static final Long PRIEST_DAMAGE = 8L;
     public static final Long PRIEST_HEALTH = 150L;
 
-    private HeroesInitialStats() {
+    // Enemy
+    public static final Integer BOSS_MULTIPLIER = 2;
+    public static final Long BOSS_BASE_DAMAGE = 50L;
+    public static final Long BOSS_BASE_HEALTH = 200L;
+
+    private DefaultStatsConstants() {
     }
 }

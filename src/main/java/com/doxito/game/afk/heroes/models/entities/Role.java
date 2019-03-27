@@ -31,4 +31,9 @@ public class Role extends BaseEntity {
         this();
         this.name = role.getName();
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

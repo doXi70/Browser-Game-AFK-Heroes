@@ -1,0 +1,61 @@
+<table>
+    <th colspan="5">Roles Management Panel</th>
+    <th:block th:each="user : ${users}">
+        <div>
+            <span>First Name: </span>
+            <span th:text="${user.firstName}"></span>
+        </div>
+        <div>
+            <span>Last Name: </span>
+            <span th:text="${user.lastName}"></span>
+        </div>
+        <div>
+            <span>: </span>
+            <span th:text="${hero.level}"></span>
+        </div>
+        <div>
+            <span>Experience: </span>
+            <span th:text="${hero.experience}"></span>
+        </div>
+
+        <div>
+            <a th:href="@{/heroes/{id}(id=${hero.id})}" class="letters-ren a-custom">Details</a>
+        </div>
+        <br></br>
+    </th:block>
+
+    <tr>
+        <td>
+            <span>Role Management</span>
+        </td>
+        <td>
+            <span>Active Sessions</span>
+        </td>
+        <td>
+            <span>Tavern Management</span>
+        </td>
+        <td>
+            <span>Adventures Management</span>
+        </td>
+        <td>
+            <span>Dungeons Management</span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a class="btn btn-default" th:href="@{/admin/role-management}">Manage</a>
+        </td>
+        <td>
+            <a class="btn btn-default" th:href="@{/admin/active-sessions}">Manage</a>
+        </td>
+        <td>
+            <a class="btn btn-default" th:href="@{/admin/tavern-management}">Manage</a>
+        </td>
+        <td>
+            <a class="btn btn-default" th:href="@{/admin/adventures-management}">Manage</a>
+        </td>
+        <td>
+            <a class="btn btn-default" th:href="@{/admin/dungeons-management}">Manage</a>
+        </td>
+    </tr>
+</table>

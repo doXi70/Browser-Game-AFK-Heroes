@@ -4,11 +4,9 @@ import com.doxito.game.afk.heroes.constants.GameDifficulty;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -26,6 +24,9 @@ public class Dungeon extends BaseEntity {
     @Column(name = "level_number")
     private Integer levelNumber;
 
+    @OneToMany
+    private List<Enemy> enemies;
+
     @Transactional
     public Long getExperienceReward() {
         Objects.requireNonNull(adventure, "Adventure for this dungeon is null!");
@@ -33,7 +34,7 @@ public class Dungeon extends BaseEntity {
 
         for (GameDifficulty gameDifficulty : GameDifficulty.values()) {
             if (adventureDifficulty.equals(gameDifficulty)) {
-                return Math.round(gameDifficulty.getExpMultiplayer() * adventure.getActNumber());
+                return Math.round(gameDifficulty.getMultiplayer() * adventure.getActNumber());
             }
         }
 
