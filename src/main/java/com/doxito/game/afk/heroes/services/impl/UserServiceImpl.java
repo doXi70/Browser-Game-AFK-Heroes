@@ -1,18 +1,20 @@
 package com.doxito.game.afk.heroes.services.impl;
 
 import com.doxito.game.afk.heroes.constants.UserRole;
+import com.doxito.game.afk.heroes.models.dtos.ActiveSessionsDto;
 import com.doxito.game.afk.heroes.models.dtos.EditUserProfileDto;
 import com.doxito.game.afk.heroes.models.dtos.UserRegisterDto;
-import com.doxito.game.afk.heroes.models.entities.Hero;
 import com.doxito.game.afk.heroes.models.entities.Role;
 import com.doxito.game.afk.heroes.models.entities.User;
 import com.doxito.game.afk.heroes.repositories.HeroRepository;
 import com.doxito.game.afk.heroes.repositories.RoleRepository;
 import com.doxito.game.afk.heroes.repositories.UserRepository;
+import com.doxito.game.afk.heroes.services.Mapper;
 import com.doxito.game.afk.heroes.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -31,13 +33,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final HeroRepository heroRepository;
+    private final Mapper mapper;
+
+    @Autowired
+    private SessionRegistry sessionRegistry;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository,
-                           HeroRepository heroRepository) {
+                           HeroRepository heroRepository, Mapper mapper) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.heroRepository = heroRepository;
+        this.mapper = mapper;
     }
 
     @Override
@@ -93,5 +100,20 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public List<User> findAll() {
         return this.userRepository.findAll();
+    }
+
+    @Override
+    public List<User> findAllByEmail(List<String> emails) {
+        return this.userRepository.findAllByEmailIsIn(emails);
+    }
+
+    @Override
+    public ActiveSessionsDto[] getAllActiveSessions() {
+        List<String> emails = this.sessionRegistry.getAllPrincipals().stream()
+                .filter(u -> !sessionRegistry.getAllSessions(u, false).isEmpty())
+                .map(user -> ((UserDetails) user).getUsername())
+                .collect(Collectors.toList());
+
+        return mapper.convert(findAllByEmail(emails), ActiveSessionsDto[].class);
     }
 }

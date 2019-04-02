@@ -1,37 +1,23 @@
 <table>
-    <th colspan="5">Administration Panel</th>
-    <tr>
-        <td>
-            <span>Role Management</span>
-        </td>
-        <td>
-            <span>Active Sessions</span>
-        </td>
-        <td>
-            <span>Tavern Management</span>
-        </td>
-        <td>
-            <span>Adventures Management</span>
-        </td>
-        <td>
-            <span>Dungeons Management</span>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a class="btn btn-default" th:href="@{/admin/role-management}">Manage</a>
-        </td>
-        <td>
-            <a class="btn btn-default" th:href="@{/admin/active-sessions}">Manage</a>
-        </td>
-        <td>
-            <a class="btn btn-default" th:href="@{/admin/tavern-management}">Manage</a>
-        </td>
-        <td>
-            <a class="btn btn-default" th:href="@{/admin/adventures-management}">Manage</a>
-        </td>
-        <td>
-            <a class="btn btn-default" th:href="@{/admin/dungeons-management}">Manage</a>
-        </td>
-    </tr>
+    <th colspan="5">Active Sessions</th>
+    <table>
+        <th>Active Sessions</th>
+        <tr>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Email</td>
+            <td>Username</td>
+            <td>Last Login</td>
+        </tr>
+        <th:block th:each="user : ${users}">
+            <tr>
+                <td th:text="${user.firstName}"></td>
+                <td th:text="${user.lastName}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.username}"></td>
+                <td> Under Construction </td>
+            </tr>
+        </th:block>
+    </table>
+    <a class="btn btn-default" th:href="@{/admin}">Back</a>
 </table>

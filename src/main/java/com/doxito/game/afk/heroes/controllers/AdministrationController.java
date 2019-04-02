@@ -1,6 +1,8 @@
 package com.doxito.game.afk.heroes.controllers;
 
+import com.doxito.game.afk.heroes.models.dtos.ActiveSessionsDto;
 import com.doxito.game.afk.heroes.models.entities.User;
+import com.doxito.game.afk.heroes.services.Mapper;
 import com.doxito.game.afk.heroes.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,10 +18,12 @@ import java.util.List;
 public class AdministrationController {
 
     private final UserService userService;
+    private final Mapper mapper;
 
     @Autowired
-    public AdministrationController(UserService userService) {
+    public AdministrationController(UserService userService, Mapper mapper) {
         this.userService = userService;
+        this.mapper = mapper;
     }
 
     @GetMapping
@@ -44,7 +48,9 @@ public class AdministrationController {
     }
 
     @GetMapping("/active-sessions")
-    public String activeSessions() {
+    public String activeSessions(Model model) {
+        model.addAttribute("users",  this.userService.getAllActiveSessions());
+        model.addAttribute("view", "admin/active-sessions");
         return "base-layout";
     }
 
