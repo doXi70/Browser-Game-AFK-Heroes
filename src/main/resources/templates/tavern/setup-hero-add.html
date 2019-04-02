@@ -1,0 +1,44 @@
+<main>
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <form class="form-horizontal" th:action="@{/heroes}" method="post">
+                <fieldset>
+                    <legend>Add Hero</legend>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="name">Name</label>
+                        <div class="col-sm-4 ">
+                            <input class="form-control" type="text" id="name" th:value="${hero.name}"
+                                   placeholder="Hero Name" name="name"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Class</label>
+                        <div class="col-sm-4 ">
+                            <select>
+                                <option th:value="warrior" name="warrior">Warrior</option>
+                                <option th:value="rogue" name="rogue">Rogue</option>
+                                <option th:value="mage" name="mage">Mage</option>
+                                <option th:value="priest" name="priest">Priest</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="price">Price</label>
+                        <div class="col-sm-4 ">
+                            <input class="form-control" type="number" min="0" id="price" th:value="${hero.price}"
+                                   placeholder="Hero Price" name="price"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <a class="btn btn-default" th:href="@{/admin}">Cancel</a>
+                            <input value="Submit" type="submit" class="btn btn-primary"/></div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</main>

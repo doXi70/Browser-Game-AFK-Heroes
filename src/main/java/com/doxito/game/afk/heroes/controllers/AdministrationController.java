@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -42,9 +43,10 @@ public class AdministrationController {
         return "base-layout";
     }
 
-    @PostMapping("/roles-management")
-    public String processRoleManagement() {
-        return "base-layout";
+    @PostMapping("/role-management/{userId}")
+    public String processRoleManagement(@PathVariable Long userId) {
+        this.userService.changeRole(userId);
+        return "redirect:/admin";
     }
 
     @GetMapping("/active-sessions")
@@ -55,7 +57,8 @@ public class AdministrationController {
     }
 
     @GetMapping("/tavern-management")
-    public String tavernManagement() {
+    public String tavernManagement(Model model) {
+        model.addAttribute("view", "admin/setup");
         return "base-layout";
     }
 

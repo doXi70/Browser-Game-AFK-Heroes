@@ -14,11 +14,10 @@
             <td th:text="${user.email}"></td>
             <td th:text="${user.username}"></td>
             <td>
-                <a th:href="@{/admin/role-management/{id}(id=${user.id})}" class="letters-ren a-custom">
-                    <!-- TODO: use vo and set boolean -->
-                    <span th:if="!user.isAdmin">Admin</span>
-                    <span th:if="user.isAdmin">User</span>
-                </a>
+                <form method="post" th:action="@{/admin/role-management/{id}(id=${user.id})}">
+                    <button class="btn-dark" type="submit" th:if="${!user.isAdmin()}">Admin</button>
+                    <button class="btn-dark" type="submit" th:if="${user.isAdmin()}">User</button>
+                </form>
             </td>
         </tr>
     </th:block>

@@ -5,9 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
-import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 @Getter
@@ -51,7 +50,18 @@ public class User extends BaseEntity {
         this.roles.add(role);
     }
 
-    @Transactional
+    public void removeRole(Role role) {
+        Iterator<Role> it = this.roles.iterator();
+        while (it.hasNext()) {
+            Role ro = it.next();
+
+            if (ro.getName().equals(role.getName())) {
+                it.remove();
+                break;
+            }
+        }
+    }
+
     public boolean isAdmin() {
         return this.roles.stream().anyMatch(r -> r.getName().equals(UserRole.ADMIN.getName()));
     }

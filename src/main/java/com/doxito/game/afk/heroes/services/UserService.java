@@ -22,4 +22,6 @@ public interface UserService {
     List<User> findAllByEmail(List<String> emails);
 
     ActiveSessionsDto[] getAllActiveSessions();
+
+    void changeRole(Long userId);
 }

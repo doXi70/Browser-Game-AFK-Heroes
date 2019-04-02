@@ -116,4 +116,22 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
         return mapper.convert(findAllByEmail(emails), ActiveSessionsDto[].class);
     }
+
+    @Override
+    public void changeRole(Long userId) {
+        User user = this.userRepository.findOne(userId);
+
+        Role role = user.getRoles().iterator().next();
+
+        Role newRole;
+        if (role.getName().equals(UserRole.ADMIN.getName())) {
+            newRole = this.roleRepository.findByName(UserRole.USER.getName());
+        } else {
+            newRole = this.roleRepository.findByName(UserRole.ADMIN.getName());
+        }
+
+        user.removeRole(role);
+        user.addRole(newRole);
+        this.userRepository.save(user);
+    }
 }
