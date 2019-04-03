@@ -63,9 +63,11 @@ public class AdministrationController {
     }
 
     @GetMapping("/adventures-management")
-    public String adventuresManagement() {
+    public String adventure(Model model) {
+        model.addAttribute("view", "admin/adventures-management");
         return "base-layout";
     }
+
 
     @GetMapping("/dungeons-management")
     public String dungeonsManagement() {

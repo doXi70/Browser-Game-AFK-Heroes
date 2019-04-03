@@ -14,4 +14,14 @@ public enum GameDifficulty {
     GameDifficulty(Double multiplayer) {
         this.multiplayer = multiplayer;
     }
+
+    public static GameDifficulty findByName(String name) {
+        for (GameDifficulty gameDifficulty : GameDifficulty.values()) {
+            if (gameDifficulty.name().equalsIgnoreCase(name)) {
+                return gameDifficulty;
+            }
+        }
+
+        throw new IllegalArgumentException("Dungeon with name " + name + " does not exist!");
+    }
 }

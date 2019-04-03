@@ -1,61 +1,36 @@
-<table>
-    <th colspan="5">Roles Management Panel</th>
-    <th:block th:each="user : ${users}">
-        <div>
-            <span>First Name: </span>
-            <span th:text="${user.firstName}"></span>
-        </div>
-        <div>
-            <span>Last Name: </span>
-            <span th:text="${user.lastName}"></span>
-        </div>
-        <div>
-            <span>: </span>
-            <span th:text="${hero.level}"></span>
-        </div>
-        <div>
-            <span>Experience: </span>
-            <span th:text="${hero.experience}"></span>
-        </div>
+<main>
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <form class="form-horizontal" th:action="@{/adventures}" method="post">
+                <fieldset>
+                    <legend>Add Adventure</legend>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="name">Name</label>
+                        <div class="col-sm-4 ">
+                            <input class="form-control" type="text" id="name" th:value="${name}"
+                                   placeholder="Hero Name" name="name"/>
+                        </div>
+                    </div>
 
-        <div>
-            <a th:href="@{/heroes/{id}(id=${hero.id})}" class="letters-ren a-custom">Details</a>
-        </div>
-        <br></br>
-    </th:block>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Difficulty</label>
+                        <div class="col-sm-4 ">
+                            <select name="difficulty">
+                                <option th:value="EASY">Easy</option>
+                                <option th:value="MEDIUM">Medium</option>
+                                <option th:value="HARD">Hard</option>
+                                <option th:value="HELL">Hell</option>
+                            </select>
+                        </div>
+                    </div>
 
-    <tr>
-        <td>
-            <span>Role Management</span>
-        </td>
-        <td>
-            <span>Active Sessions</span>
-        </td>
-        <td>
-            <span>Tavern Management</span>
-        </td>
-        <td>
-            <span>Adventures Management</span>
-        </td>
-        <td>
-            <span>Dungeons Management</span>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a class="btn btn-default" th:href="@{/admin/role-management}">Manage</a>
-        </td>
-        <td>
-            <a class="btn btn-default" th:href="@{/admin/active-sessions}">Manage</a>
-        </td>
-        <td>
-            <a class="btn btn-default" th:href="@{/admin/tavern-management}">Manage</a>
-        </td>
-        <td>
-            <a class="btn btn-default" th:href="@{/admin/adventures-management}">Manage</a>
-        </td>
-        <td>
-            <a class="btn btn-default" th:href="@{/admin/dungeons-management}">Manage</a>
-        </td>
-    </tr>
-</table>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <a class="btn btn-default" th:href="@{/admin}">Cancel</a>
+                            <input value="Submit" type="submit" class="btn btn-primary"/></div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</main>

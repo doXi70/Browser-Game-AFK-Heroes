@@ -19,6 +19,6 @@ public class Adventure extends BaseEntity {
     @Column(name = "difficulty")
     private GameDifficulty difficulty;
 
-    @Column(name = "actNumber")
+    @Column(name = "act_number")
     private Integer actNumber;
 }
