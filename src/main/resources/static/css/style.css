@@ -7077,7 +7077,6 @@ a.list-group-item-danger.active:focus {
 
 
 table {
-    margin-left: 10%;
     text-align: center;
 }
 
@@ -7094,8 +7093,4 @@ td img {
 
 td {
     width: 300px;
-}
-
-td:hover {
-    background-color: lightgreen;
 }

@@ -15,8 +15,8 @@
             <td th:text="${user.username}"></td>
             <td>
                 <form method="post" th:action="@{/admin/role-management/{id}(id=${user.id})}">
-                    <button class="btn-dark" type="submit" th:if="${!user.isAdmin()}">Admin</button>
-                    <button class="btn-dark" type="submit" th:if="${user.isAdmin()}">User</button>
+                    <button class="btn btn-default" type="submit" th:if="${!user.isAdmin()}">Admin</button>
+                    <button class="btn btn-default" type="submit" th:if="${user.isAdmin()}">User</button>
                 </form>
             </td>
         </tr>

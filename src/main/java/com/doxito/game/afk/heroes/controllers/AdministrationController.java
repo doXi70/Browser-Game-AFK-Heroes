@@ -58,7 +58,7 @@ public class AdministrationController {
 
     @GetMapping("/tavern-management")
     public String tavernManagement(Model model) {
-        model.addAttribute("view", "admin/setup");
+        model.addAttribute("view", "tavern/setup");
         return "base-layout";
     }
 

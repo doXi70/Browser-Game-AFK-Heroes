@@ -1,5 +1,6 @@
 package com.doxito.game.afk.heroes.services;
 
+import com.doxito.game.afk.heroes.models.dtos.ItemCreateVO;
 import com.doxito.game.afk.heroes.models.entities.Hero;
 import com.doxito.game.afk.heroes.models.entities.Item;
 
@@ -11,4 +12,5 @@ public interface ItemService {
 
     List<Item> findByHero(Hero hero);
 
+    void create(ItemCreateVO createVO);
 }

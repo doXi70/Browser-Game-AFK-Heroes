@@ -1,23 +1,22 @@
+<h3 style="text-align: center">Active Sessions</h3>
+
 <table>
-    <th colspan="5">Active Sessions</th>
-    <table>
-        <th>Active Sessions</th>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Username</th>
+        <th>Last Login</th>
+    </tr>
+    <th:block th:each="user : ${users}">
         <tr>
-            <td>First Name</td>
-            <td>Last Name</td>
-            <td>Email</td>
-            <td>Username</td>
-            <td>Last Login</td>
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.username}"></td>
+            <td> Under Construction </td>
         </tr>
-        <th:block th:each="user : ${users}">
-            <tr>
-                <td th:text="${user.firstName}"></td>
-                <td th:text="${user.lastName}"></td>
-                <td th:text="${user.email}"></td>
-                <td th:text="${user.username}"></td>
-                <td> Under Construction </td>
-            </tr>
-        </th:block>
-    </table>
-    <a class="btn btn-default" th:href="@{/admin}">Back</a>
+    </th:block>
 </table>
+
+<a class="btn btn-default" th:href="@{/admin}">Back</a>
