@@ -1,7 +1,7 @@
 package com.doxito.game.afk.heroes.controllers;
 
-import com.doxito.game.afk.heroes.models.dtos.ActiveSessionsDto;
 import com.doxito.game.afk.heroes.models.entities.User;
+import com.doxito.game.afk.heroes.services.AdventureService;
 import com.doxito.game.afk.heroes.services.Mapper;
 import com.doxito.game.afk.heroes.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +19,13 @@ import java.util.List;
 public class AdministrationController {
 
     private final UserService userService;
+    private final AdventureService adventureService;
     private final Mapper mapper;
 
     @Autowired
-    public AdministrationController(UserService userService, Mapper mapper) {
+    public AdministrationController(UserService userService, AdventureService adventureService, Mapper mapper) {
         this.userService = userService;
+        this.adventureService = adventureService;
         this.mapper = mapper;
     }
 
@@ -70,7 +72,9 @@ public class AdministrationController {
 
 
     @GetMapping("/dungeons-management")
-    public String dungeonsManagement() {
+    public String dungeonsManagement(Model model) {
+        model.addAttribute("adventures", this.adventureService.findAll());
+        model.addAttribute("view", "admin/dungeons-management");
         return "base-layout";
     }
 

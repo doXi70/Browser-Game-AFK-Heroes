@@ -9,6 +9,8 @@ import com.doxito.game.afk.heroes.services.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AdventureServiceImpl implements AdventureService {
 
@@ -36,5 +38,10 @@ public class AdventureServiceImpl implements AdventureService {
 
         adventure.setActNumber(++lastActNumber);
         this.adventureRepository.save(adventure);
+    }
+
+    @Override
+    public List<Adventure> findAll() {
+        return this.adventureRepository.findAll();
     }
 }
